@@ -1,6 +1,6 @@
 # Source Snapshot
 
-Private source SHA: 7e70a5c7786c8697ce6a244538578f7218115f88
+Private source SHA: 34b679057d6221ab3e4c4449223cd5e80ea5215e
 
 Export type: sanitized CI-only working-tree snapshot.
 

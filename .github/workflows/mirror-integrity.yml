@@ -80,7 +80,7 @@ jobs:
             exit 1
           fi
 
-          if grep -R -I -n -E 'tkwqtkzeuehxvuvoxiav|postgresql://[^[:space:]:]+:[^[:space:]@]+@|sb_secret_[A-Za-z0-9_-]+|-----BEGIN (RSA |OPENSSH |EC |DSA )?PRIVATE KEY-----|ITCA_Exam_Results|Student Name|Lecturer' . --exclude-dir=.git --exclude='.github/workflows/mirror-integrity.yml'; then
+          if grep -R -I -n -E 'tkwqtkzeuehxvuvoxiav|postgresql://[^[:space:]:]+:[^[:space:]@]+@|sb_secret_[A-Za-z0-9_-]+|-----BEGIN (RSA |OPENSSH |EC |DSA )?PRIVATE KEY-----|ITCA_Exam_Results|Student Name|Lecturer' . --exclude-dir=.git --exclude='mirror-integrity.yml'; then
             echo "Forbidden sensitive content patterns found."
             exit 1
           fi
