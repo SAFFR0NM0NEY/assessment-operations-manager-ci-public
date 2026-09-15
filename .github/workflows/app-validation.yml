@@ -13,7 +13,7 @@ jobs:
     name: Validate public snapshot
     runs-on: ubuntu-latest
     env:
-      VITE_APP_ENV: test
+      VITE_APP_ENV: local-development
       VITE_APP_VERSION: 0.0.0-foundation
       VITE_APP_STATUS_LABEL: Personal Skills Development / Reference Build
       VITE_SUPABASE_URL: https://example.supabase.co
