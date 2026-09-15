@@ -1,0 +1,87 @@
+.page {
+  min-height: 100vh;
+  background: var(--color-page);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(20rem, 0.48fr);
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.intro {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.brandLockup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.brandLogo {
+  width: 10.25rem;
+  height: auto;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-2);
+}
+
+.brandText {
+  color: var(--color-brand-green);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.title {
+  max-width: 14ch;
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0;
+  line-height: var(--line-height-tight);
+}
+
+.summary {
+  max-width: 42rem;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-loose);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.signOutGroup {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.signOutError {
+  margin: 0;
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+@media (max-width: 820px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: var(--font-size-2xl);
+  }
+}

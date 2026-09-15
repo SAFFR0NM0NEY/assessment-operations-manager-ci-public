@@ -1,0 +1,11 @@
+.message,
+.reference {
+  margin: 0;
+}
+
+.reference {
+  margin-top: var(--space-2);
+  color: var(--color-text-soft);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}

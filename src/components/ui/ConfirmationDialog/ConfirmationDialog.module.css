@@ -1,0 +1,82 @@
+.dialog {
+  width: min(34rem, calc(100vw - var(--space-8)));
+  max-width: 100%;
+  max-height: calc(100vh - var(--space-8));
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  padding: 0;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+  color: var(--color-text);
+  overflow: hidden;
+}
+
+.dialog:not([open]) {
+  display: none;
+}
+
+.dialog::backdrop {
+  background: rgb(23 33 31 / 52%);
+}
+
+.content {
+  display: grid;
+  max-height: calc(100vh - var(--space-8));
+  min-width: 0;
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.header {
+  display: grid;
+  gap: var(--space-3);
+  min-width: 0;
+  overflow: auto;
+  padding: var(--space-5);
+}
+
+.title {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0;
+  line-height: var(--line-height-tight);
+  overflow-wrap: anywhere;
+}
+
+.description {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: var(--line-height-base);
+  overflow-wrap: anywhere;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  min-width: 0;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface-muted);
+  padding: var(--space-4) var(--space-5);
+}
+
+@media (max-width: 480px) {
+  .dialog {
+    width: min(100%, calc(100vw - var(--space-4)));
+    max-height: calc(100vh - var(--space-4));
+  }
+
+  .content {
+    max-height: calc(100vh - var(--space-4));
+  }
+
+  .actions {
+    justify-content: stretch;
+  }
+
+  .actions > * {
+    flex: 1 1 10rem;
+  }
+}

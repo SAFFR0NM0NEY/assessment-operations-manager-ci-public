@@ -1,0 +1,113 @@
+.panel {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-4);
+  min-width: 0;
+  border: 1px solid var(--state-border);
+  border-radius: var(--radius-lg);
+  background: var(--state-bg);
+  padding: var(--space-5);
+  color: var(--color-text);
+}
+
+.neutral {
+  --state-bg: var(--color-surface);
+  --state-border: var(--color-border);
+  --state-tone: var(--color-text-muted);
+}
+
+.info {
+  --state-bg: var(--color-info-soft);
+  --state-border: var(--color-info-border);
+  --state-tone: var(--color-info);
+}
+
+.success {
+  --state-bg: var(--color-success-soft);
+  --state-border: var(--color-success-border);
+  --state-tone: var(--color-success);
+}
+
+.warning {
+  --state-bg: var(--color-warning-soft);
+  --state-border: var(--color-warning-border);
+  --state-tone: var(--color-warning);
+}
+
+.danger {
+  --state-bg: var(--color-danger-soft);
+  --state-border: var(--color-danger-border);
+  --state-tone: var(--color-danger);
+}
+
+.indicator {
+  display: inline-grid;
+  width: 1.75rem;
+  height: 1.75rem;
+  place-items: center;
+  color: var(--state-tone);
+}
+
+.indicator::before {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 999px;
+  background: currentcolor;
+  content: '';
+}
+
+.content {
+  display: grid;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.label {
+  margin: 0;
+  color: var(--state-tone);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0;
+  line-height: var(--line-height-tight);
+  overflow-wrap: anywhere;
+}
+
+.description,
+.body {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base);
+  overflow-wrap: anywhere;
+}
+
+.body > :first-child {
+  margin-top: 0;
+}
+
+.body > :last-child {
+  margin-bottom: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  min-width: 0;
+  padding-top: var(--space-1);
+}
+
+@media (max-width: 480px) {
+  .panel {
+    grid-template-columns: 1fr;
+  }
+}

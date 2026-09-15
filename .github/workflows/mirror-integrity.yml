@@ -1,0 +1,81 @@
+name: mirror-integrity
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify sanitized mirror integrity
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Verify source SHA, manifest, and forbidden paths
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -f CI_SOURCE_SHA.txt
+          test -f CI_EXPORT_MANIFEST.tsv
+          test -f CI_EXPORT_MANIFEST_SHA256.txt
+
+          source_sha="$(cat CI_SOURCE_SHA.txt)"
+          if [[ ! "$source_sha" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "CI_SOURCE_SHA.txt must contain one lowercase 40-character SHA."
+            exit 1
+          fi
+
+          expected_manifest_hash="$(tr -d '[:space:]' < CI_EXPORT_MANIFEST_SHA256.txt)"
+          actual_manifest_hash="$(sha256sum CI_EXPORT_MANIFEST.tsv | awk '{print $1}')"
+          if [[ "$actual_manifest_hash" != "$expected_manifest_hash" ]]; then
+            echo "Manifest checksum mismatch."
+            exit 1
+          fi
+
+          header="$(head -n 1 CI_EXPORT_MANIFEST.tsv)"
+          if [[ "$header" != $'path\tbytes\tsha256' ]]; then
+            echo "Manifest header is invalid."
+            exit 1
+          fi
+
+          tail -n +2 CI_EXPORT_MANIFEST.tsv | while IFS=$'\t' read -r path bytes sha256; do
+            if [[ -z "${path:-}" ]]; then
+              continue
+            fi
+            if [[ ! -f "$path" ]]; then
+              echo "Manifest entry is missing: $path"
+              exit 1
+            fi
+            actual_bytes="$(wc -c < "$path" | tr -d '[:space:]')"
+            if [[ "$actual_bytes" != "$bytes" ]]; then
+              echo "Byte-size mismatch for $path"
+              exit 1
+            fi
+            actual_sha="$(sha256sum "$path" | awk '{print $1}')"
+            if [[ "$actual_sha" != "$sha256" ]]; then
+              echo "SHA-256 mismatch for $path"
+              exit 1
+            fi
+          done
+
+          forbidden_roots=(docs supabase scripts node_modules dist release coverage .github/workflows/ci.yml)
+          for forbidden in "${forbidden_roots[@]}"; do
+            if [[ -e "$forbidden" ]]; then
+              echo "Forbidden public snapshot path exists: $forbidden"
+              exit 1
+            fi
+          done
+
+          forbidden_files="$(find . -path './.git' -prune -o -type f \( -name '.env' -o \( -name '.env.*' ! -name '.env.example' \) -o -iname '*.xlsx' -o -iname '*.xlsm' -o -iname '*.xls' -o -iname '*ITCA_Exam_Results*' \) -print)"
+          if [[ -n "$forbidden_files" ]]; then
+            echo "Forbidden sensitive file patterns found."
+            echo "$forbidden_files"
+            exit 1
+          fi

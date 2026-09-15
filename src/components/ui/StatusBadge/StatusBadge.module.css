@@ -1,0 +1,57 @@
+.badge {
+  display: inline-flex;
+  flex-shrink: 0;
+  min-height: 1.5rem;
+  align-items: center;
+  max-width: 100%;
+  border: 1px solid var(--badge-border);
+  border-radius: 999px;
+  padding: 0 var(--space-2);
+  background: var(--badge-bg);
+  color: var(--badge-color);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  gap: var(--space-1);
+  letter-spacing: 0;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.badge::before {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: currentcolor;
+  content: '';
+}
+
+.neutral {
+  --badge-bg: var(--color-surface-subtle);
+  --badge-border: var(--color-border-strong);
+  --badge-color: var(--color-text-muted);
+}
+
+.info {
+  --badge-bg: var(--color-info-soft);
+  --badge-border: var(--color-info-border);
+  --badge-color: var(--color-info);
+}
+
+.success {
+  --badge-bg: var(--color-success-soft);
+  --badge-border: var(--color-success-border);
+  --badge-color: var(--color-success);
+}
+
+.warning {
+  --badge-bg: var(--color-warning-soft);
+  --badge-border: var(--color-warning-border);
+  --badge-color: var(--color-warning);
+}
+
+.danger {
+  --badge-bg: var(--color-danger-soft);
+  --badge-border: var(--color-danger-border);
+  --badge-color: var(--color-danger);
+}

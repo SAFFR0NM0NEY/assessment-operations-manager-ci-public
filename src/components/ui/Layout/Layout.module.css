@@ -1,0 +1,90 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.inline {
+  display: flex;
+  min-width: 0;
+}
+
+.section {
+  display: grid;
+  gap: var(--space-5);
+  min-width: 0;
+}
+
+.sectionHeader {
+  display: grid;
+  max-width: 48rem;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.sectionTitle {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0;
+  line-height: var(--line-height-tight);
+  overflow-wrap: anywhere;
+}
+
+.sectionDescription {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-md);
+  overflow-wrap: anywhere;
+}
+
+.gapSmall {
+  gap: var(--space-2);
+}
+
+.gapMedium {
+  gap: var(--space-4);
+}
+
+.gapLarge {
+  gap: var(--space-6);
+}
+
+.gapExtraLarge {
+  gap: var(--space-8);
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.alignStart {
+  align-items: flex-start;
+}
+
+.alignCenter {
+  align-items: center;
+}
+
+.alignEnd {
+  align-items: flex-end;
+}
+
+.justifyStart {
+  justify-content: flex-start;
+}
+
+.justifyBetween {
+  justify-content: space-between;
+}
+
+.justifyEnd {
+  justify-content: flex-end;
+}
+
+@media (max-width: 680px) {
+  .sectionTitle {
+    font-size: var(--font-size-lg);
+  }
+}
