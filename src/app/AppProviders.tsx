@@ -1,10 +1,11 @@
 import { QueryClientProvider, type QueryClient } from '@tanstack/react-query';
 import { useState, type ReactNode } from 'react';
-import { BrowserRouter } from 'react-router';
+import { BrowserRouter, HashRouter } from 'react-router';
 
 import { AuthProvider, type AuthClient } from '../features/auth';
 import { AuthorizationProvider, type AuthorizationClient } from '../features/authorization';
 import { CampusContextProvider } from '../features/campus-context';
+import { getPreferredRouterMode } from '../lib/desktopRuntime';
 import { createQueryClient } from '../lib/queryClient';
 
 interface AppProvidersProps {
@@ -21,13 +22,14 @@ export function AppProviders({
   queryClient,
 }: AppProvidersProps) {
   const [client] = useState(() => queryClient ?? createQueryClient());
+  const Router = getPreferredRouterMode() === 'hash' ? HashRouter : BrowserRouter;
 
   return (
     <QueryClientProvider client={client}>
       <AuthProvider authClient={authClient}>
         <AuthorizationProvider authorizationClient={authorizationClient}>
           <CampusContextProvider>
-            <BrowserRouter>{children}</BrowserRouter>
+            <Router>{children}</Router>
           </CampusContextProvider>
         </AuthorizationProvider>
       </AuthProvider>

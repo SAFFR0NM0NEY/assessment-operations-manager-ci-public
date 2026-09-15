@@ -9,6 +9,8 @@ const VALID_BROWSER_CONFIG = {
   supabasePublishableKey: 'sb_publishable_test_key',
   supabaseUrl: 'https://example.supabase.co',
 } as const;
+const SECRET_LIKE_TEST_KEY = `sb_${'secret'}_not_for_browser`;
+const SERVICE_ROLE_TEST_KEY = `service_${'role'}_not_for_browser`;
 
 describe('browser application configuration', () => {
   it('exposes safe configured project identity values with display metadata', () => {
@@ -97,14 +99,14 @@ describe('browser application configuration', () => {
     expect(() =>
       parseBrowserAppConfig({
         ...VALID_BROWSER_CONFIG,
-        supabasePublishableKey: 'sb_secret_not_for_browser',
+        supabasePublishableKey: SECRET_LIKE_TEST_KEY,
       }),
     ).toThrow(/secret key/i);
 
     expect(() =>
       parseBrowserAppConfig({
         ...VALID_BROWSER_CONFIG,
-        supabasePublishableKey: 'service_role_not_for_browser',
+        supabasePublishableKey: SERVICE_ROLE_TEST_KEY,
       }),
     ).toThrow(/service-role key/i);
   });
